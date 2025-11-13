@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мои чаты | MedChat</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a2a6c, #2a4d69, #4b86b4);
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .sidebar {
+            width: 300px;
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+        }
+
+        .sidebar h2 {
+            margin-bottom: 20px;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .user-list {
+            list-style: none;
+        }
+
+        .user-item {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .user-item:hover {
+            background: #34495e;
+        }
+
+        .user-item a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #3498db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        .user-info {
+            flex: 1;
+        }
+
+        .user-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .user-position {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 30px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 28px;
+        }
+
+        .chats-list {
+            list-style: none;
+        }
+
+        .chat-item {
+            padding: 20px;
+            border-bottom: 1px solid #ecf0f1;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .chat-item:hover {
+            background: #f8f9fa;
+        }
+
+        .chat-item a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .chat-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #3498db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-size: 20px;
+        }
+
+        .chat-info {
+            flex: 1;
+        }
+
+        .chat-name {
+            font-weight: 600;
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .chat-position {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+
+        .chat-last-message {
+            color: #666;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 400px;
+        }
+
+        .chat-time {
+            color: #95a5a6;
+            font-size: 12px;
+            text-align: right;
+        }
+
+        .no-chats {
+            text-align: center;
+            padding: 50px;
+            color: #7f8c8d;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #2ecc71;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        .unread-count {
+            background-color: #e74c3c; /* Красный цвет */
+            color: white;
+            border-radius: 50%; /* Круг */
+            width: 20px;
+            height: 20px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 8px; /* Отступ от имени */
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding: 15px;
+            }
+
+            .user-item {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{% url 'home' %}" class="logo">Med<span>Chat</span></a>
+        <div class="nav-links">
+            <a href="{% url 'profile' %}">Профиль</a>
+            <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" style="background: none; border: none; color: white; font-weight: 600; cursor: pointer;">Выйти</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="sidebar">
+            <h2>Все пользователи</h2>
+            <ul class="user-list">
+                {% for user in all_users %}
+                <li class="user-item">
+                    <a href="{% url 'create_chat' user.id %}">
+                        <div class="user-avatar">
+                            {% if user.profile.photo %}
+                                👤
+                            {% else %}
+                                👤
+                            {% endif %}
+                        </div>
+                        <div class="user-info">
+                            <div class="user-name">{{ user.profile.full_name|default:user.username }}</div>
+                            <div class="user-position">{{ user.profile.position|default:"Пользователь" }}</div>
+                        </div>
+                    </a>
+                </li>
+                {% empty %}
+                <li class="user-item">Нет других пользователей</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <div class="header">
+                <h1>Мои чаты</h1>
+            </div>
+
+            {% if chats_with_last_message_and_unread %}
+            <ul class="chats-list">
+                {% for item in chats_with_last_message_and_unread %}
+                <li class="chat-item">
+                    <a href="{% url 'chat_detail' item.chat.id %}">
+                        <div class="chat-header">
+                            <div class="chat-avatar">
+                                {% if item.other_participant.profile.photo %}
+                                    👤
+                                {% else %}
+                                    👤
+                                {% endif %}
+                            </div>
+                            <div class="chat-info">
+                                <div class="chat-name">
+                                    {{ item.other_participant.profile.full_name|default:item.other_participant.username }}
+                                    {% if item.unread_count > 0 %}
+                                        <span class="unread-count">{{ item.unread_count }}</span>
+                                    {% endif %}
+                                </div>
+                                <div class="chat-position">{{ item.other_participant.profile.position|default:"Пользователь" }}</div>
+                                {% if item.last_message %}
+                                <div class="chat-last-message">
+                                    {% if item.last_message.sender == request.user %}
+                                        Вы:
+                                    {% endif %}
+                                    {{ item.last_message.content }}
+                                </div>
+                                {% endif %}
+                            </div>
+                            {% if item.last_message %}
+                            <div class="chat-time">
+                                {{ item.last_message.timestamp|date:"H:i" }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <div class="no-chats">
+                <h3>У вас пока нет чатов</h3>
+                <p>Начните общение, выбрав пользователя из списка слева</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

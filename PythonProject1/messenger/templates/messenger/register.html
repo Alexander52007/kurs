@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация | MedChat — Мессенджер для здравоохранения</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a2a6c, #2a4d69, #4b86b4);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1000px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .info-section {
+            flex: 1;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .info-section h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .info-section p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .features {
+            margin-top: 30px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .feature::before {
+            content: "✓";
+            background: #3498db;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-weight: bold;
+        }
+
+        .form-section {
+            flex: 1;
+            padding: 50px 40px;
+        }
+
+        .form-section h1 {
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #3498db;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #2980b9, #1c6ea4);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .login-link a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .login-link a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo h3 {
+            color: #3498db;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: #2ecc71;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .info-section {
+                padding: 30px;
+            }
+
+            .form-section {
+                padding: 40px 30px;
+            }
+        }
+
+        .password-hint {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="info-section">
+            <div class="logo">
+                <h3>Med<span>Chat</span></h3>
+            </div>
+            <h2>Безопасная коммуникация для здравоохранения нового поколения</h2>
+            <p>MedChat — это специализированный мессенджер, созданный для медицинских учреждений с учетом требований конфиденциальности и безопасности персональных данных.</p>
+
+            <div class="features">
+                <div class="feature">
+                    <span>Шифрование данных по стандарту HIPAA</span>
+                </div>
+                <div class="feature">
+                    <span>Мгновенная координация между отделениями</span>
+                </div>
+                <div class="feature">
+                    <span>Интеграция с электронными медицинскими картами</span>
+                </div>
+                <div class="feature">
+                    <span>Аудит всех действий пользователей</span>
+                </div>
+                <div class="feature">
+                    <span>Поддержка экстренных вызовов и оповещений</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h1>Создать аккаунт</h1>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_username">Имя пользователя</label>
+                    {{ form.username }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_password1">Пароль</label>
+                    {{ form.password1 }}
+                    <div class="password-hint">Минимум 8 символов, буквы и цифры</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_password2">Подтверждение пароля</label>
+                    {{ form.password2 }}
+                </div>
+
+                <button type="submit" class="btn">Зарегистрироваться</button>
+            </form>
+
+            <div class="login-link">
+                Уже есть аккаунт? <a href="{% url 'login' %}">Войти в систему</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
